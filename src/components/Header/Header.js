@@ -3,7 +3,7 @@ import React from 'react';
 function Header() {
 	return (
 		<header>
-			<h1>Word Game</h1>
+			<h1>Word Game fuck</h1>
 		</header>
 	);
 }
