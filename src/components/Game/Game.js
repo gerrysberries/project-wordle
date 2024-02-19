@@ -5,6 +5,7 @@ import GuessResults from '../GuessResults';
 
 import {sample} from '../../utils';
 import {WORDS} from '../../data';
+import {NUM_OF_GUESSES_ALLOWED} from '../../constants';
 
 // Pick a random word on every page-load.
 const answer = sample(WORDS);
@@ -18,10 +19,23 @@ function Game() {
 		setGuesses([...guesses, tentativeGuess]);
 	}
 
+	function checkGameOver(guess) {
+		return guess === answer || (guesses.length === NUM_OF_GUESSES_ALLOWED && guess !== answer);
+	}
+
 	return (
 		<>
-			<GuessResults guesses={guesses} />
-			<GuessInput handleSubmitGuess={handleSubmitGuess} />
+			<GuessResults
+				guesses={guesses}
+				answer={answer}
+				checkGameOver={checkGameOver}
+			/>
+			<GuessInput
+				handleSubmitGuess={handleSubmitGuess}
+				answer={answer}
+				checkGameOver={checkGameOver}
+				guesses={guesses}
+			/>
 		</>
 	);
 }

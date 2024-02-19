@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 
-function GuessInput({handleSubmitGuess}) {
+function GuessInput({handleSubmitGuess, checkGameOver, guesses}) {
 	const [tentativeGuess, setTentativeGuess] = useState('');
+	// const isWinner = tentativeGuess ? tentativeGuess === answer : undefined;
 
 	function handleSubmit(e) {
 		e.preventDefault();
 
 		handleSubmitGuess(tentativeGuess);
-
+		console.log(checkGameOver(tentativeGuess));
 		setTentativeGuess('');
+		return checkGameOver(tentativeGuess);
 	}
 
 	return (
@@ -18,6 +20,7 @@ function GuessInput({handleSubmitGuess}) {
 		>
 			<label htmlFor="guess-input">Enter guess:</label>
 			<input
+				disabled={checkGameOver(guesses.at(-1))}
 				required
 				minLength={5}
 				maxLength={5}
